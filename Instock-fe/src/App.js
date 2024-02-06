@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import components
 import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+import Footer from "./components/Footer/Footer";
 import Warehouse from "./components/pages/warehouse/Warehouse";
 import WarehouseDetails from "./components/warehouseDetails/WarehouseDetails";
 import EditWarehouse from "./components/editwarehouse/EditWarehouse";
