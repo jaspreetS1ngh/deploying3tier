@@ -1,0 +1,23 @@
+[
+  {
+    "warehouse_name": "Chicago",
+    "address": "3218 Guess Rd",
+    "city": "Chicago",
+    "country": "USA",
+    "contact_name": "Jameson Schuppe",
+    "contact_position": "Warehouse Manager",
+    "contact_phone": "+1 (919) 797-2875",
+    "contact_email": "jschuppe@instock.com"
+  },
+  {
+    "id": 10,
+    "warehouse_name": "Chicago",
+    "address": "3218 Guess Rd",
+    "city": "Chicago",
+    "country": "USA",
+    "contact_name": "Jameson Schuppe",
+    "contact_position": "Warehouse Manager",
+    "contact_phone": "+1 (919) 797-2875",
+    "contact_email": "jschuppe@instock.com"
+  }
+]
