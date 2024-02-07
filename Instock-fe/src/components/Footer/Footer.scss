@@ -1,0 +1,23 @@
+@import '../../styles/partials/global.scss';
+// @import '../../styles/partials/fonts.scss';
+@import '../../styles/partials/colors.scss';
+@import '../../styles/partials/breakpoints.scss';
+
+.footer__text {
+    font-size: 0.67rem;
+    color: $secondraryDark;
+    background-color: $backgroundLight;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: center;
+    padding: 2.5rem;
+    width: stretch;
+    position: absolute;
+    bottom: -73.875rem; 
+    @include medium {
+        bottom: -20.313rem; 
+    }
+    @include large {
+        bottom: -12.813rem; 
+    }
+}
