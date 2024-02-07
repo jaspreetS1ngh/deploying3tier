@@ -11,14 +11,13 @@ const PORT = process.env.PORT||8088;
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (res,next) => {
-    next();
-    return res.send("Welcome to Instock")
+app.get('/', (req,res) => {
+    return res.send("Welcome to Instock");
 });
 
 
-app.use("/inventory", inventoryRoutes);
-app.use("/warehouse", warehouseRoutes);
+app.use("/", inventoryRoutes);
+app.use("/", warehouseRoutes);
 
 
 app.listen(PORT, () =>{
