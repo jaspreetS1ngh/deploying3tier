@@ -24,8 +24,6 @@ function WarehouseDetails ({props}) {
 
     }, [id])
 
-    
-
     return(
         <div className="container--title">
             
