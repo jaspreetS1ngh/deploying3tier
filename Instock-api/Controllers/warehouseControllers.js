@@ -3,8 +3,8 @@ const { v4:uuidv4 } =require("uuid");
 
 
 
-// Put/Edit a warehouse
 
+// Put/Edit a warehouse
 
 exports.updateWarehouse = (req, res) => {
   const obj = {
@@ -58,7 +58,9 @@ exports.addWarehouse = (req, res) => {
       knex("warehouses")
         .where({ id: newWarehouseId })
         .then((data) => {
-          res.status(201).json(data[0]);
+
+          res.status(200).json(data[0]);
+
         });
     })
     .catch((err) => res.status(404).send(`Error creating Warehouse: ${err}`));
