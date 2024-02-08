@@ -3,7 +3,7 @@
     "id": 1,
     "warehouse_id": 1,
     "item_name": "newtv",
-    "description": "Updated TV description",
+    "description": "test",
     "category": "tv",
     "status": "In Stock",
     "quantity": 500

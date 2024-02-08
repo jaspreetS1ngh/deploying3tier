@@ -2,8 +2,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import components
-import Header from "./Components/header/Header";
-import Footer from "./Components/Footer/Footer";
+import Header from "./components/header/Header";
+import Footer from "./components/Footer/Footer";
 // import Warehouse from "./components/pages/warehouse/Warehouse";
 // import WarehouseDetails from "./components/warehouseDetails/WarehouseDetails";
 // import EditWarehouse from "./components/editwarehouse/EditWarehouse";
@@ -11,8 +11,8 @@ import Footer from "./Components/Footer/Footer";
 // import Inventory from "./components/pages/inventory/Inventory";
 // import InventoryDetails from "./components/inventoryDetails/InventoryDetails";
 // import DeleteWarehouse from "./components/deleteWarehouse/DeleteWarehouse";
-import Editinventory from "./Components/EditInventory/Editinventory";
-import AddInventory from "./Components/AddInventory/AddInventory";
+import Editinventory from "./components/EditInventory/Editinventory";
+import AddInventory from "./components/AddInventory/AddInventory";
 import InventoryList from "./components/InventoryList/InventoryList";
 // import DeleteInventory from "./components/delteInventory/DeleteInventory";
 
