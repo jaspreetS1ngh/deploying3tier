@@ -76,7 +76,7 @@ const InventoryList = () => {
         <div className="inventoryList__item-detail">{item.quantity}</div>
         <div className="inventoryList__item-detail">{item.warehouse_name}</div>
         <div className="inventoryList__actions-detail">
-          <Link to={`/inventories/${item.id}/edit`}><img src={editIcon} alt="Edit" /></Link>
+          <Link to={`/inventory/${item.id}/edit`}><img src={editIcon} alt="Edit" /></Link>
           <button onClick={() => deleteInventory(item)}><img src={deleteIcon} alt="Delete" /></button>
           <Link to={`/inventories/${item.id}`}><img src={rightIcon} alt="Details" /></Link>
         </div>
@@ -84,13 +84,13 @@ const InventoryList = () => {
     ))}
   </div>
 </>
-            {deletingInventory ? <DeleteInventory
+            {/* {deletingInventory ? <DeleteInventory
                 inventory={deletingInventory}
                 onDeleted={onInventoryDeleted}
                 onCancelled={() => setDeletingInventory(null)}
                 />
                 :<></>
-            }
+            } */}
         </>
       );
     };

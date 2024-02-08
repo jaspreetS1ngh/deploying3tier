@@ -9,7 +9,7 @@ const fetchInventory = () => {
   return data;
 };
 
-router.get('/api/inventory/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
   console.log("Received request for inventory item with id:", id);
   const currentItem = fetchInventory().find(item => item.id === parseInt(id));
@@ -22,7 +22,7 @@ router.get('/api/inventory/:id', (req, res) => {
   }
 });
 
-router.put('/api/inventory/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const { id } = req.params;
   const { item_name, description, category, status, warehouse_id } = req.body;
 
@@ -49,25 +49,25 @@ router.put('/api/inventory/:id', (req, res) => {
   }
 });
 
-// router.get("/", (req, res) => {
-//   const inventories = fetchInventories();
-//   res.status(200).json(inventories);
-// });
+router.get("/", (req, res) => {
+  const inventories = fetchInventories();
+  res.status(200).json(inventories);
+});
 
-// router.post("/", (req, res) => {
-//   const { itemName, description, category, status, quantity, warehouseName } = req.body;
-//   if (!itemName || !description || !category || !status || !quantity || !warehouseName) {
-//     return res.status(400).send("Missing required fields");
-//   }
-//   const newItem = addInventoryItem({
-//     itemName,
-//     description,
-//     category,
-//     status,
-//     quantity: Number(quantity),
-//     warehouseName,
-//   });
-//   res.status(201).json(newItem);
-// });
+router.post("/", (req, res) => {
+  const { itemName, description, category, status, quantity, warehouseName } = req.body;
+  if (!itemName || !description || !category || !status || !quantity || !warehouseName) {
+    return res.status(400).send("Missing required fields");
+  }
+  const newItem = addInventoryItem({
+    itemName,
+    description,
+    category,
+    status,
+    quantity: Number(quantity),
+    warehouseName,
+  });
+  res.status(201).json(newItem);
+});
 
 module.exports = router;
