@@ -32,7 +32,7 @@ const AddInventory = () => {
         };
 
         try {
-            await axios.post("http://localhost:8080/inventories", addItem);
+            await axios.post("http://localhost:8088/inventories", addItem);
             console.log('Form submitted', addItem);
             setFormData({
                 itemName: '',

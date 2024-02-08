@@ -11,7 +11,7 @@ import Footer from "./components/Footer/Footer";
 // import Inventory from "./components/pages/inventory/Inventory";
 // import InventoryDetails from "./components/inventoryDetails/InventoryDetails";
 // import DeleteWarehouse from "./components/deleteWarehouse/DeleteWarehouse";
-// import EditInventory from "./components/editInventory/EditInventory";
+import Editinventory from "./components/EditInventory/Editinventory";
 import AddInventory from "./components/AddInventory/AddInventory";
 import InventoryList from "./components/InventoryList/InventoryList";
 // import DeleteInventory from "./components/delteInventory/DeleteInventory";
@@ -34,9 +34,9 @@ function App() {
             <Route path="/warehouse/:id/edit" element={<EditWarehouse />} /> */}
 
             {/* Inventory routes */}
-            <Route path="/inventory" element={<InventoryList />} />
-            {/* <Route path="/inventory/:id" element={<InventoryDetails />} />
-            <Route path="/inventory/:id/edit" element={<EditInventory />} /> */}
+            {/* <Route path="/inventory" element={<Inventory />} />
+            <Route path="/inventory/:id" element={<InventoryDetails />} />*/}
+            <Route path="/inventory/:id/edit" element={<Editinventory />}/>
 
             <Route path="/inventory/add" element={<AddInventory/>} />
             {/* <Route path="/inventory/:id/delete" element={<DeleteInventory />} /> */}
