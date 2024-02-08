@@ -13,8 +13,9 @@ import Axios from "axios"
 // import Inventory from "./components/pages/inventory/Inventory";
 // import InventoryDetails from "./components/inventoryDetails/InventoryDetails";
 // import DeleteWarehouse from "./components/deleteWarehouse/DeleteWarehouse";
-// import EditInventory from "./components/editInventory/EditInventory";
-// import AddInventory from "./components/AddInventory/AddInventory";
+import Editinventory from "./components/EditInventory/Editinventory";
+import AddInventory from "./components/AddInventory/AddInventory";
+import InventoryList from "./components/InventoryList/InventoryList";
 // import DeleteInventory from "./components/delteInventory/DeleteInventory";
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
         }
       };
   
-      fetchWarehouse(); // Moved outside the try-catch block
+      fetchWarehouse(); 
     }, []); 
 
 
@@ -56,10 +57,10 @@ function App() {
 
             {/* Inventory routes */}
             {/* <Route path="/inventory" element={<Inventory />} />
-            <Route path="/inventory/:id" element={<InventoryDetails />} />
-            <Route path="/inventory/:id/edit" element={<EditInventory />} /> */}
+            <Route path="/inventory/:id" element={<InventoryDetails />} />*/}
+            <Route path="/inventory/:id/edit" element={<Editinventory />}/>
 
-            {/* <Route path="/inventory/add" element={<AddInventory/>} /> */}
+            <Route path="/inventory/add" element={<AddInventory/>} />
             {/* <Route path="/inventory/:id/delete" element={<DeleteInventory />} /> */}
 
           </Routes>

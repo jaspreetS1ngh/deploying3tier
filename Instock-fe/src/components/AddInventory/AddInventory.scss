@@ -16,7 +16,7 @@
     top: 16%;
     width: stretch;
     top: 140px;
-    margin: 0 17px 100px 17px;
+    margin: 0 17px 300px 17px;
     @include medium{
 
     }
@@ -52,8 +52,18 @@
     @include medium{
         flex-direction:column;
     }
+    @include large{
+        flex-direction:column;
+    }
     &__container{
         @include medium{
+        display:flex;
+        flex-direction:row;
+    }
+    @include large{
+        flex-direction:column;
+    }
+    @include medium{
         display:flex;
         flex-direction:row;
     }
