@@ -16,8 +16,8 @@ app.get('/', (req,res) => {
 });
 
 
-app.use("/", inventoryRoutes);
-app.use("/", warehouseRoutes);
+app.use("/api/inventory", inventoryRoutes);
+app.use("/api/warehouses", warehouseRoutes);
 
 
 app.listen(PORT, () =>{
