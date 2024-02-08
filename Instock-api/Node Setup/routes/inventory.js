@@ -52,6 +52,9 @@ router.put('/api/inventory/:id', (req, res) => {
 });
 
 module.exports = router;
+const { fetchInventories, addInventoryItem } = require("../../Controllers/inventoryControllers");
+
+
 router.get("/", (req, res) => {
   const inventories = fetchInventories();
   res.status(200).json(inventories);
@@ -74,3 +77,4 @@ router.post("/", (req, res) => {
 });
 
 module.exports = router;
+
