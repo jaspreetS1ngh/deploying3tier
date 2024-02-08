@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
-const { fetchInventories, addInventoryItem } = require("../../Controllers/inventoryControllers");
+const { fetchInventories, addInventoryItem } = require("../../controllers/inventoryControllers");
 
 const fetchInventory = () => {
   const filePath = "./data/inventory.json";
-  console.log("Reading file from path:", filePath);
   const data = JSON.parse(fs.readFileSync(filePath));
-  console.log("Fetched inventory data:", data);
   return data;
 };
 
@@ -51,30 +49,25 @@ router.put('/api/inventory/:id', (req, res) => {
   }
 });
 
-module.exports = router;
-const { fetchInventories, addInventoryItem } = require("../../Controllers/inventoryControllers");
+// router.get("/", (req, res) => {
+//   const inventories = fetchInventories();
+//   res.status(200).json(inventories);
+// });
 
-
-router.get("/", (req, res) => {
-  const inventories = fetchInventories();
-  res.status(200).json(inventories);
-});
-
-router.post("/", (req, res) => {
-  const { itemName, description, category, status, quantity, warehouseName } = req.body;
-  if (!itemName || !description || !category || !status || !quantity || !warehouseName) {
-    return res.status(400).send("Missing required fields");
-  }
-  const newItem = addInventoryItem({
-    itemName,
-    description,
-    category,
-    status,
-    quantity: Number(quantity),
-    warehouseName,
-  });
-  res.status(201).json(newItem);
-});
+// router.post("/", (req, res) => {
+//   const { itemName, description, category, status, quantity, warehouseName } = req.body;
+//   if (!itemName || !description || !category || !status || !quantity || !warehouseName) {
+//     return res.status(400).send("Missing required fields");
+//   }
+//   const newItem = addInventoryItem({
+//     itemName,
+//     description,
+//     category,
+//     status,
+//     quantity: Number(quantity),
+//     warehouseName,
+//   });
+//   res.status(201).json(newItem);
+// });
 
 module.exports = router;
-
