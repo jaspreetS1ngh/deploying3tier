@@ -11,6 +11,7 @@ const InventoryList = () => {
     const [inventoryList, setInventoryList] = useState([]);
     const [display, setDisplay] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [deletingInventory, setDeletingInventory] = useState(null)
   
     useEffect(() => {
       axios.get('http://localhost:8088/inventory')
@@ -21,6 +22,15 @@ const InventoryList = () => {
           console.log(error);
         });
     }, []);
+
+    function deleteInventory(inventory){
+      setDeletingInventory(inventory)
+    }
+
+    function onInventoryDeleted(inventory){
+      setInventoryList(inventoryList.filter(item => item.id !== inventory.id));
+      setDeletingInventory(null)
+    }
   
     const showModal = (item) => {
       setSelectedItem(item);
@@ -31,15 +41,6 @@ const InventoryList = () => {
       setDisplay(false);
       setSelectedItem(null);
     };
-  
-    // const deleteInventory = (id) => {
-    //   axios.delete(`http://localhost:8080/inventory/${id}`)
-    //     .then(() => {
-    //       setInventoryList(inventoryList.filter(item => item.id !== id));
-    //       cancelModal(); 
-    //     })
-    //     .catch(err => console.log(err));
-    // };
   
     return (
         <>
@@ -76,21 +77,20 @@ const InventoryList = () => {
         <div className="inventoryList__item-detail">{item.warehouse_name}</div>
         <div className="inventoryList__actions-detail">
           <Link to={`/inventories/${item.id}/edit`}><img src={editIcon} alt="Edit" /></Link>
-          <button onClick={() => showModal(item)}><img src={deleteIcon} alt="Delete" /></button>
+          <button onClick={() => deleteInventory(item)}><img src={deleteIcon} alt="Delete" /></button>
           <Link to={`/inventories/${item.id}`}><img src={rightIcon} alt="Details" /></Link>
         </div>
       </div>
     ))}
   </div>
 </>
-          {/* {display && selectedItem && (
-            <DeleteItem
-              display={display}
-              item={selectedItem}
-              deleteInventory={() => deleteInventory(selectedItem.id)}
-              cancelModal={cancelModal}
-            />
-          )} */}
+            {deletingInventory ? <DeleteInventory
+                inventory={deletingInventory}
+                onDeleted={onInventoryDeleted}
+                onCancelled={() => setDeletingInventory(null)}
+                />
+                :<></>
+            }
         </>
       );
     };
