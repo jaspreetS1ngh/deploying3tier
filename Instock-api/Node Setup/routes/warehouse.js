@@ -9,6 +9,10 @@ const fetchWarehouse = () => {
 //    console.log(JSON.parse(fs.readFileSync("./data/warehouse.json")))
   return JSON.parse(fs.readFileSync("./data/warehouse.json"));
 };
+const fetchInventory = () => {
+  //    console.log(JSON.parse(fs.readFileSync("./data/warehouse.json")))
+    return JSON.parse(fs.readFileSync("./data/inventory.json"));
+  };
 
 
 const addWarehouse = (warehouse) => {
@@ -105,5 +109,17 @@ router.post("/api/warehouses", (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+router.get('/api/inventory/:id', (req, res) => {
+  const { id } = req.params;
+  const currentItem = fetchInventory().find(item => item.id === id );
+
+  if (currentItem) {
+    res.json(currentItem);
+  } else {
+    res.status(404).json({ error: 'Item not found' });
+  }
+});
+
 
 module.exports = router;

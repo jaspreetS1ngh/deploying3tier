@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import './AddInventory.scss';
-import errorIcon from '../../assets/icons/error-24px.svg';
-import arrowBack from '../../assets/icons/arrow_back-24px.svg';
+import errorIcon from '../../Assets/icons/error-24px.svg';
+import arrowBack from '../../Assets/icons/arrow_back-24px.svg';
 
 const AddInventory = () => {
     const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const AddInventory = () => {
         };
 
         try {
-            await axios.post("http://localhost:8080/inventories", addItem);
+            await axios.post("http://localhost:8088/inventories", addItem);
             console.log('Form submitted', addItem);
             setFormData({
                 itemName: '',

@@ -1,0 +1,48 @@
+.edit{
+    &__form{
+        display: flex;
+        flex-direction: column;
+        &-first{
+            display: flex;
+            flex-direction: column;
+            &--name{
+
+            }
+            &--description{
+
+            }
+            &--category{
+
+            }
+        }
+
+        &-second{
+            display: flex;
+            flex-direction: column;
+            &--status{
+                display: flex;
+                flex-direction: column;
+            }
+            &--warehouse{
+
+                &---value{
+
+                }
+            }
+            &--buttons{
+                display: flex;
+                flex-direction: row;
+
+                &---cancel{
+
+                }
+                &---save{
+
+                }
+            }
+
+        }
+
+    }
+
+}
