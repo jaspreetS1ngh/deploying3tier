@@ -1,0 +1,276 @@
+@use "../../styles/partials/breakpoints" as bk;
+@use "../../styles/partials/colors" as cl;
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/global" as *;
+
+.item {
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+  background-color: #ffffff;
+
+  @include bk.small {
+    margin: 0 1rem;
+    margin-top: -67px;
+  }
+  @include bk.medium {
+    margin: 0 2rem;
+    margin-top: -102px;
+  }
+  @include bk.large {
+    margin: 0 8.125rem;
+    margin-top: -102px;
+  }
+  &Form {
+    width: 100%;
+    background: #ffffff;
+
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+  }
+  &-top {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid cl.$secondaryLight;
+    align-items: baseline;
+
+    &__backIcon {
+      @include bk.small {
+        flex: 0 0 10%;
+        margin-right: 0.3rem;
+      }
+      @include bk.medium {
+        flex: 0 0 10%;
+        margin-right: 0.5rem;
+      }
+      @include bk.large {
+        flex: 0 0 10%;
+        margin-right: 0.5rem;
+      }
+    }
+
+    &__title {
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 36px;
+      color: #13182c;
+      @include bk.small {
+        width: 80%;
+      }
+      @include bk.medium {
+        width: 85%;
+      }
+      @include bk.large {
+        width: 85%;
+      }
+    }
+    &__edit {
+      border-radius: 20px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2e66e6;
+      &Text {
+        display: none;
+      }
+      @include bk.medium {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 10px;
+        width: 81px;
+        height: 38px;
+        &Text {
+          display: flex;
+          font-weight: 600;
+          font-size: 14px;
+          color: #ffffff;
+        }
+      }
+      @include bk.large {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 10px;
+        width: 81px;
+        height: 38px;
+        &Text {
+          display: flex;
+          font-weight: 600;
+          font-size: 14px;
+          color: #ffffff;
+        }
+      }
+      &Icon {
+        fill: white;
+        justify-content: center;
+      }
+    }
+    &__edit:hover {
+      background-color: cl.$backgroundDark;
+    }
+  }
+  &-bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    @include bk.medium {
+      flex-direction: row;
+      padding: 2.5rem;
+    }
+    @include bk.large {
+      flex-direction: row;
+      padding: 2.5rem;
+    }
+    &__title {
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      font-size: 11px;
+
+      color: #5c667e;
+    }
+    &__left {
+      @include bk.medium {
+        width: 50%;
+        border-right: 1px solid cl.$secondaryLight;
+      }
+      @include bk.large {
+        width: 50%;
+        border-right: 1px solid cl.$secondaryLight;
+      }
+      &__description {
+        margin-bottom: 1.25rem;
+        @include bk.medium {
+          flex-wrap: wrap;
+          width: 90%;
+        }
+        @include bk.large {
+          flex-wrap: wrap;
+          width: 90%;
+        }
+        &Text {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: #13182c;
+        }
+      }
+    }
+    &__right {
+      display: flex;
+      @include bk.medium {
+        margin-left: 4rem;
+      }
+      @include bk.large {
+        margin-left: 4rem;
+      }
+      &-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        @include bk.medium {
+          gap: 2.5rem;
+        }
+        @include bk.large {
+          gap: 3rem;
+        }
+      }
+
+      &__category {
+        margin-bottom: 1.25rem;
+
+        &Text {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: #13182c;
+        }
+      }
+      &__upper {
+        display: flex;
+        flex-direction: row;
+      }
+      &__bottom {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__status {
+        @include bk.small {
+          width: 70%;
+        }
+        @include bk.medium {
+          margin-right: 3rem;
+          width: 80%;
+        }
+        @include bk.large {
+          margin-right: 3rem;
+          width: 80%;
+        }
+        &Text {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: #13182c;
+          &--inStock {
+            color: cl.$inStock;
+            background: rgba(21, 132, 99, 0.07);
+            border-radius: 20px;
+            color: #158463;
+            padding: 4px 8px;
+            font-weight: 600;
+            font-size: 12px;
+          }
+          &--outOfStock {
+            background: rgba(201, 69, 21, 0.07);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            color: #c94515;
+            padding: 4px 8px;
+          }
+        }
+      }
+      &__qty {
+        &Text {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: #13182c;
+        }
+      }
+      &__warehouse {
+        &Text {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: #13182c;
+        }
+      }
+    }
+  }
+}
+
+#inStock {
+  color: cl.$inStock;
+  background: rgba(21, 132, 99, 0.07);
+  border-radius: 20px;
+  color: #158463;
+  padding: 4px 8px;
+  font-weight: 600;
+  font-size: 12px;
+}
+#outOfStock {
+  background: rgba(201, 69, 21, 0.07);
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #c94515;
+  padding: 4px 8px;
+}
