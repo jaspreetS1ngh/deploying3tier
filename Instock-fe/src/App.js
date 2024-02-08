@@ -13,6 +13,7 @@ import Footer from "./components/Footer/Footer";
 // import DeleteWarehouse from "./components/deleteWarehouse/DeleteWarehouse";
 // import EditInventory from "./components/editInventory/EditInventory";
 import AddInventory from "./components/AddInventory/AddInventory";
+import InventoryList from "./components/InventoryList/InventoryList";
 // import DeleteInventory from "./components/delteInventory/DeleteInventory";
 
 function App() {
@@ -33,8 +34,8 @@ function App() {
             <Route path="/warehouse/:id/edit" element={<EditWarehouse />} /> */}
 
             {/* Inventory routes */}
-            {/* <Route path="/inventory" element={<Inventory />} />
-            <Route path="/inventory/:id" element={<InventoryDetails />} />
+            <Route path="/inventory" element={<InventoryList />} />
+            {/* <Route path="/inventory/:id" element={<InventoryDetails />} />
             <Route path="/inventory/:id/edit" element={<EditInventory />} /> */}
 
             <Route path="/inventory/add" element={<AddInventory/>} />
