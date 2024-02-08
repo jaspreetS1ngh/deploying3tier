@@ -24,8 +24,28 @@ const addWarehouse = (warehouse) => {
   return newWarehouse;
 };
 
+//GET ALL WAREHOUSES
+
+router.get('/', (req,res) =>{
+  const warehouseList = fetchWarehouse();
+  const warehouseListed = warehouseList.map((warehouse) =>{
+    return {
+      id: warehouse["id"],
+      warehouse_name: warehouse["warehouse_name"],
+      address: warehouse['address'],
+      contact_name: warehouse['contact_name'],
+      contact_phone: warehouse['contact_phone'],
+      contact_email: warehouse['contact_email'],
+    }
+  })
+  console.log(warehouseListed)
+  if(warehouseListed){
+    return res.status(200).json({warehouseListed});
+  }
+})
+
 //GET SINGLE WAREHOUSE
-router.get('/api/warehouses/:id', (req,res) =>{
+router.get('/:id', (req,res) =>{
     const {id} = req.params;
 
     const warehouseMatch = fetchWarehouse().find((warehouse) => warehouse.id == id);
@@ -47,7 +67,7 @@ router.get('/api/warehouses/:id', (req,res) =>{
 
 
 //ADD NEW WAREHOUSE
-router.post("/api/warehouses", (req, res) => {
+router.post("/", (req, res) => {
   try {
     let {
       warehouse_name,
