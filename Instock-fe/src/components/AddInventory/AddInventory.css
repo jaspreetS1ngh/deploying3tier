@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "TitilliumWeb";
+  src: url("../../assets/fonts/TitilliumWeb-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "TitilliumWeb";
+  src: url("../../assets/fonts/TitilliumWeb-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: bold;
+}
 *,
 *::after,
 *::before {
@@ -26,7 +38,7 @@
   width: -moz-available;
   width: stretch;
   top: 140px;
-  margin: 0 17px 100px 17px;
+  margin: 0 17px 300px 17px;
 }
 .addInventory__heading {
   display: flex;
@@ -63,6 +75,22 @@
 }
 @media only screen and (min-width: 768px) and (max-width: 1279px) {
   .item-form {
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .item-form {
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .item-form__container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .item-form__container {
     flex-direction: column;
   }
 }
