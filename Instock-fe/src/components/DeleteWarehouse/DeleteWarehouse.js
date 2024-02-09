@@ -25,7 +25,7 @@ function DeleteWarehouse({ warehouse, onDeleted, onCancelled }) {
     <div className="delete">
       
       <div className="delete__content">
-        <h1 className="delete__content--title">Delete {warehouse.name} warehouse?</h1>
+        <h1 className="delete__content--title">Delete {warehouse.warehouse_name} warehouse?</h1>
         <span className="delete__content--close" onClick={cancelDeletion}>&times;</span>
 
         <div className="delete__content--text">

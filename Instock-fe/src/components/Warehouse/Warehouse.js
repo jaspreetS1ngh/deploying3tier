@@ -34,7 +34,7 @@ function Warehouse({warehouses}) {
             </div>
         </div>
         <div className="warehouse-list">
-            <WarehouseItems warehouses={warehouses}/>
+            { warehouses && <WarehouseItems warehouses={warehouses}/> }
         </div>
       </section>
     );
