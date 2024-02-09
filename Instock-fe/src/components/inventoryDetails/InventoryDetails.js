@@ -7,24 +7,64 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function InventoryDetails() {
-  const { id } = useParams();
-  const [itemDetails, setItemDetails] = useState([]);
+  // const { id } = useParams();
+  // const [itemDetails, setItemDetails] = useState([]);
   const [warehouseName, setWarehouseName] = useState("");
 
-  const getItemDetails = () => {
-    axios
-      .get(`http://localhost:8080/inventories/${id}`)
-      .then((res) => {
-        console.log(res);
-        setItemDetails(res.data.inventoriesData[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const [itemDetails, setItemDetails] = useState({
+    item_name: '',
+    description: '',
+    category: '',
+    status: '',
+    quantity:'',
+    warehouse_id:'',
+  }); 
+
+  const { id } = useParams();
+  useEffect(() => {
+    fetchData(id);
+  }, [id]);
+
+const fetchData = async (parmid) => {
+    try {
+      const response = await axios.get(`http://localhost:8088/inventory/${parmid}`);
+      const currentItem = response.data;
+setItemDetails({
+          item_name: currentItem.item_name,
+          description: currentItem.description,
+          category: currentItem.category,
+          status: currentItem.status ,
+          quantity: currentItem.quantity,
+          warehouse_id: currentItem.warehouse_id,
+          
+        });
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
+
+
+
+
+
+
+
+  // const getItemDetails = () => {
+  //   axios
+  //     .get(`http://localhost:8088/inventory/${id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       setItemDetails(res.data.inventoriesData[0]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
   const getWarehouseName = () => {
-    const url = `http://localhost:8080/warehouses/${warehouse_id}`;
+    const url = `http://localhost:8088/api/warehouses/${itemDetails.warehouseid}`;
     axios
       .get(url)
       .then((res) => {
@@ -36,15 +76,15 @@ export default function InventoryDetails() {
     // });
   };
 
-  useEffect(() => {
-    getItemDetails();
-  }, []);
+  // useEffect(() => {
+  //   getItemDetails();
+  // }, []);
   useEffect(() => {
     getWarehouseName();
   }, [itemDetails]);
 
-  const { item_name, category, description, status, quantity, warehouse_id } =
-    itemDetails;
+  // const { item_name, category, description, status, quantity, warehouse_id } =
+  //   itemDetails;
 
   return (
     <>
@@ -61,7 +101,7 @@ export default function InventoryDetails() {
               </div>
             </Link>
 
-            <h1 className="item-top__title">{item_name}</h1>
+            <h1 className="item-top__title">{itemDetails.name}</h1>
             <Link to={`/inventory/${id}/edit`}>
               <div className="item-top__edit">
                 <svg
@@ -88,7 +128,7 @@ export default function InventoryDetails() {
                   ITEM DESCRIPTION
                 </h3>
                 <span className="item-bottom__left__descriptionText">
-                  {description}
+                  {itemDetails.description}
                 </span>
               </div>
               <div className="item-bottom__right__category">
@@ -96,7 +136,7 @@ export default function InventoryDetails() {
                   CATEGORY
                 </h3>
                 <span className="item-bottom__right__categoryText">
-                  {category}
+                  {itemDetails.category}
                 </span>
               </div>
             </div>
@@ -107,7 +147,7 @@ export default function InventoryDetails() {
                   <h3 className="item-bottom__title  item-bottom__right__statusTitle">
                     STATUS
                   </h3>
-                  {status === "In Stock" && (
+                  {itemDetails.status === "In Stock" && (
                     <div className="item-bottom__right__status">
                       <span
                         className="item-bottom__right__statusText item-bottom__right__statusText--inStcok"
@@ -117,7 +157,7 @@ export default function InventoryDetails() {
                       </span>
                     </div>
                   )}
-                  {status === "Out of Stock" && (
+                  {itemDetails.status === "Out of Stock" && (
                     <div className="item-bottom__right__status">
                       <span
                         className="item-bottom__right__statusText  item-bottom__right__statusText--outOfStock"
@@ -133,7 +173,7 @@ export default function InventoryDetails() {
                     QUANTITY
                   </h3>
                   <span className="item-bottom__right__qtyText">
-                    {quantity}
+                    {itemDetails.quantity}
                   </span>
                 </div>
               </div>
@@ -143,7 +183,7 @@ export default function InventoryDetails() {
                     WAREHOUSE
                   </h3>
                   <span className="item-bottom__right__warehouseText">
-                    {warehouseName}
+                    {itemDetails.warehouseName}
                   </span>
                 </div>
               </div>
