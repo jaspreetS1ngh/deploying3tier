@@ -8,7 +8,7 @@ import Warehouse from "./components/Warehouse/Warehouse";
 import WarehouseDetails from "./components/Warehouse Details/WarehouseDetails";
 import { useState, useEffect } from "react";
 import Axios from "axios"
-// import EditWarehouse from "./components/editwarehouse/EditWarehouse";
+import EditWarehouse from "./components/editwarehouse/EditWarehouse";
 // import AddWarehouse from "./components/addwarehouse/AddWarehouse";
 // import Inventory from "./components/pages/inventory/Inventory";
 import InventoryDetails from "./components/inventoryDetails/InventoryDetails";
@@ -52,12 +52,12 @@ function App() {
              <Route path="/" exact element={<Warehouse warehouses ={warehouses}  />} />
             <Route path="/warehouse" element={<Warehouse warehouses={warehouses} />}  />
             <Route path="/warehouse/:id" element={<WarehouseDetails />} />
-            {/* <Route path="/warehouse/add" element={<AddWarehouse />} />
-            <Route path="/warehouse/:id/edit" element={<EditWarehouse />} />  */}
+            {/* <Route path="/warehouse/add" element={<AddWarehouse />} /> */}
+            <Route path="/warehouse/:id/edit" element={<EditWarehouse />} /> 
 
             {/* Inventory routes */}
             {/* <Route path="/inventory" element={<Inventory />} />*/}
-            <Route path="/inventory/api/inventory/:id" element={<InventoryDetails />} />
+            <Route path="/inventory/:id" element={<InventoryDetails />} />
             <Route path="/inventory/:id/edit" element={<Editinventory />}/>
             <Route path="/inventory" element={<InventoryList/>} />
             <Route path="/inventory/add" element={<AddInventory/>} />
