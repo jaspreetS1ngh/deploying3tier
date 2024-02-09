@@ -28,7 +28,6 @@ exports.addInventoryItem = async (req, res) => {
     return res.status(400).send("Please make sure to fill out all required fields.");
   }
 
-  // Check if the warehouse exists
   const warehouseExists = await knex('warehouses').where({ id: warehouse_id }).first();
   if (!warehouseExists) {
     return res.status(404).send("Warehouse not found.");
@@ -42,7 +41,7 @@ exports.addInventoryItem = async (req, res) => {
       status,
       quantity,
       warehouse_id
-    }, 'id'); // Assuming 'id' is the auto-increment primary key
+    }, 'id');
 
     const newInventoryItem = await knex('inventories').where({ id: newInventoryId }).first();
     return res.status(201).json(newInventoryItem);
@@ -51,27 +50,4 @@ exports.addInventoryItem = async (req, res) => {
     return res.status(500).send("Error creating inventory item.");
   }
 };
-// exports.createInventoryItem = (req, res) => {
 
-//   const newItem = {
-//     item_name: req.body.itemName, 
-//     description: req.body.description,
-//     category: req.body.category,
-//     status: req.body.status,
-//     quantity: req.body.quantity, 
-//     warehouse_id: req.body.warehouseName, 
-//   };
-  
-//   knex('inventories')
-//     .insert(newItem)
-//     .then((ids) => {      
-//       const newId = ids[0]; 
-//       return knex('inventories').where({ id: newId }).first();
-//     })
-//     .then(newItemData => {
-//       res.status(201).json(newItemData);
-//     })
-//     .catch(err => {
-//       res.status(400).send(`Error creating new inventory item: ${err}`);
-//     });
-// };
