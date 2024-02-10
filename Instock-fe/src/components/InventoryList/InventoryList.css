@@ -24,24 +24,19 @@
 /*media query for desktop */
 .inventoryList {
   position: absolute;
-  top: 8.75rem;
   background: #ffffff;
   border-radius: 0.25rem;
   box-shadow: 0rem 0.125rem 0.3125rem rgba(19, 24, 44, 0.1);
-  width: -webkit-fill-available;
-  width: -moz-available;
-  width: stretch;
-  margin: 0 1.0625rem;
+  width: 70%;
+  height: 50rem;
+  top: 33rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 @media only screen and (min-width: 768px) and (max-width: 1279px) {
   .inventoryList {
     margin: 0 4% 6.25rem 4%;
     top: 5.9375rem;
-  }
-}
-@media only screen and (min-width: 1280px) {
-  .inventoryList {
-    margin: 0 10% 9.375rem 10%;
   }
 }
 .inventoryList__main {

@@ -4,18 +4,20 @@
 
 .inventoryList {
   position: absolute;
-  top: 8.75rem; 
   background: $primaryLight;
   border-radius: 0.25rem; 
   box-shadow: 0rem 0.125rem 0.3125rem rgba(19, 24, 44, 0.1); 
-  width: stretch;
-  margin: 0 1.0625rem; 
+  width: 70%;
+  height: 50rem;
+  top: 33rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
   @include medium {
     margin: 0 4% 6.25rem 4%; 
     top: 5.9375rem; 
   }
   @include large {
-    margin: 0 10% 9.375rem 10%; 
+
   }
   &__main {
     padding: 0.9375rem 0; 

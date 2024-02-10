@@ -1,20 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const knex = require('knex')(require('../../DB Setup/knexfile'));
-const fs = require("fs");
 const { fetchInventories, addInventoryItem} = require("../../controllers/inventoryControllers");
 require('dotenv').config();
-const { v4: uuidv4 } = require('uuid');
-
-const fetchWarehouseByIdFromDb = async (id) => {
-  try {
-    const result = await knex.select('*').from('warehouses').where({ id }).first();
-    return result;
-  } catch (error) {
-    console.error("Error fetching warehouse by ID:", error);
-    throw error;
-  }
-};
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
@@ -35,21 +23,21 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { item_name, description, category, status, warehouse_id } = req.body;
-
+  const { item_name, description, quantity, category, status, warehouse_id } = req.body;
   try {
+    
     const updatedItem = await knex('inventories')
       .where({ id: parseInt(id) })
       .update({
-        warehouse_id: warehouseName,
+        warehouse_id,
         item_name,
         description,
         category,
-        status
+        status,
+        quantity
       });
-
     if (updatedItem) {
-      res.json({ success: true, message: `Item with id ${id} updated successfully.` });
+      res.json({ success: true, message: `Item with id ${id} updated successfully. ${warehouse_id}` });
     } else {
       res.status(404).json({ error: 'Item not found' });
     }
@@ -71,5 +59,18 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/add", addInventoryItem);
+
+
+//pull categpries
+router.get('/cat/categories', async (req, res) => {
+  try {
+    const uniqueCategories = await knex('inventories').distinct('category');
+    res.status(200).json(uniqueCategories);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router;
