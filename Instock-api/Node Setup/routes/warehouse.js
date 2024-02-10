@@ -130,4 +130,35 @@ router.get('/list/warehouses', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// edit warehouse
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { warehouse_name, address, city, country, contact_name, contact_position, contact_phone, contact_email } = req.body;
+  
+  try {
+    const updatedWarehouse = await knex('warehouses')
+      .where({ id: parseInt(id) })
+      .update({
+        warehouse_name,
+        address,
+        city,
+        country,
+        contact_name,
+        contact_position,
+        contact_phone,
+        contact_email
+      });
+
+    if (updatedWarehouse) {
+      res.json({ success: true, message: `Warehouse with id ${id} updated successfully.` });
+    } else {
+      res.status(404).json({ error: 'Warehouse not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;
