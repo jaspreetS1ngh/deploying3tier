@@ -9,7 +9,7 @@ import WarehouseDetails from "./components/Warehouse Details/WarehouseDetails";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 // import EditWarehouse from "./components/editwarehouse/EditWarehouse";
-// import AddWarehouse from "./components/addwarehouse/AddWarehouse";
+import AddWarehouse from "./components/AddWarehouse/Addwarehouse";
 // import Inventory from "./components/pages/inventory/Inventory";
 import InventoryDetails from "./components/inventoryDetails/InventoryDetails";
 // import DeleteWarehouse from "./components/deleteWarehouse/DeleteWarehouse";
@@ -56,7 +56,7 @@ function App() {
               element={<Warehouse warehouses={warehouses} />}
             />
             <Route path="/warehouse/:id" element={<WarehouseDetails />} />
-            {/* <Route path="/warehouse/add" element={<AddWarehouse />} /> */}
+            <Route path="/warehouse/add" element={<AddWarehouse />} />
 
             {/*<Route path="/warehouse/:id/edit" element={<EditWarehouse />} />*/}
 
