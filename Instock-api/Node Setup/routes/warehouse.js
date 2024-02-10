@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+const phoneRegex = /^\+\d{1,3}\s?\(\d{1,4}\)\s?\d{1,4}-?\d{1,4}$/;
 const knex = require('knex')(require('../../DB Setup/knexfile'));
+const cors = require('cors');
+router.use(cors());
 
 const fetchWarehousesFromDb = async () => {
   try {
@@ -60,6 +62,25 @@ router.get('/:id', async (req, res) => {
     }
 
     return res.status(200).json(warehouseMatch);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const warehouse = await fetchWarehouseByIdFromDb(id);
+
+    if (!warehouse) {
+      return res.status(404).json({ message: "Warehouse does not exist. Please check and try again" });
+    }
+
+    await knex('warehouses')
+      .where({ id: id })
+      .del();
+
+    return res.status(204).json({message: "Warehouse deleted successfully"});
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
@@ -135,7 +156,7 @@ router.get('/list/warehouses', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { warehouse_name, address, city, country, contact_name, contact_position, contact_phone, contact_email } = req.body;
-  
+
   try {
     const updatedWarehouse = await knex('warehouses')
       .where({ id: parseInt(id) })
