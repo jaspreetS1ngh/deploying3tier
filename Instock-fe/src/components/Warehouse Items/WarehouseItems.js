@@ -15,8 +15,7 @@ const List = ({ warehouses }) => {
   }
 
   function onWarehouseDeleted(warehouse){
-      warehouses = warehouses.filter(item => item.id !== warehouse.id);
-      setDeletingWarehouse(null)
+    setDeletingWarehouse(null)
   }
     console.log(warehouses)
   return (

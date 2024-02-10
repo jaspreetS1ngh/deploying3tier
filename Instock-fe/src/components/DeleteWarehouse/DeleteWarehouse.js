@@ -15,6 +15,8 @@ function DeleteWarehouse({ warehouse, onDeleted, onCancelled }) {
       })
       .catch(error => {
         console.error(error);
+        onCancelled()
+        alert(error?.response?.data?.message || 'An error occurred')
       })
 
   }
