@@ -12,6 +12,7 @@ export default function AvailableItems() {
   const [warehouseDetails, setWarehouseDetails] = useState([]);
   const [inventoryDetails, setInventoryDetails] = useState([]);
 
+  useEffect(() => {
   const getWarehouseDetails = async () => {
     try {
       const urlAPI = `http://localhost:8088/api/warehouses/${id}`;
@@ -21,7 +22,9 @@ export default function AvailableItems() {
       console.error("Error fetching warehouse: ", error.message);
     }
   };
-
+  getWarehouseDetails();
+  },[]);
+  useEffect(() => {
   const getInventoryDetails = async () => {
     try {
       const urlAPI = `http://localhost:8088/inventory/`;
@@ -33,13 +36,12 @@ export default function AvailableItems() {
     }
   };
 
-  useEffect(() => {
-    getWarehouseDetails();
-  });
 
-  useEffect(() => {
     getInventoryDetails();
-  });
+ 
+  },[]);
+
+  
 
   const filteredItems = inventoryDetails.filter(
     (inventory) => inventory.warehouse_id == id
