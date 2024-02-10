@@ -16,7 +16,7 @@ export default function WarehouseDetails() {
 
   const getWarehouseDetails = async () => {
     try{
-        const urlAPI = `http://localhost:8088/warehouses/${id}`;
+        const urlAPI = `http://localhost:8088/api/warehouses/${id}`;
         const response = await axios.get(urlAPI);
         setWarehouseDetails(response.data)
     }
@@ -28,7 +28,7 @@ export default function WarehouseDetails() {
 
   const getInventoryDetails = async () => {
     try{
-        const urlAPI = `http://localhost:8088/inventories/${id}`;
+        const urlAPI = `http://localhost:8088/inventory/${id}`;
         const response = await axios.get(urlAPI);
         setInventoryDetails(response.data)
     }

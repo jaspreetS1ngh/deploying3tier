@@ -15,7 +15,7 @@ export default function AvailableItems () {
 
        const getWarehouseDetails = async () => {
         try{
-            const urlAPI = `http://localhost:8088/warehouses/${id}`;
+            const urlAPI = `http://localhost:8088/api/warehouses/${id}`;
             const response = await axios.get(urlAPI);
             setWarehouseDetails(response.data)
         }
@@ -38,7 +38,6 @@ export default function AvailableItems () {
         
       }
 
-      console.log(inventoryDetails)
 
       useEffect(() => {
         getWarehouseDetails();
@@ -49,8 +48,8 @@ export default function AvailableItems () {
       })
 
      
-      const filteredItems = inventoryDetails.filter(inventory => inventory.warehouse_id === id);
-    
+      const filteredItems = inventoryDetails.filter(inventory => inventory.warehouse_id == id);
+      console.log(filteredItems)
        return (
         <ul>
             {filteredItems.map((inventory) => (
