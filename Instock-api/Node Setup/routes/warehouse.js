@@ -120,5 +120,14 @@ router.post("/", async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
+//list of available warehouses
+router.get('/list/warehouses', async (req, res) => {
+  try {
+    const uniqueWarehouses = await knex('warehouses').distinct('warehouse_name');
+    res.status(200).json(uniqueWarehouses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 module.exports = router;

@@ -59,7 +59,7 @@ const AddInventory = () => {
     
         try {
             const response = await axios.post("http://localhost:8088/inventory/add", addItem);
-            const newInventoryId = response.data.id; // Extract the ID from the response
+            const newInventoryId = response.data.id; 
             alert('Item added successfully with ID: ' + newInventoryId);
             setFormData({
                 itemName: '',

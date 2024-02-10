@@ -1,10 +1,11 @@
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import DeleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import EditIcon from "../../assets/icons/edit-24px.svg";
-import "./WarehouseItems.scss";
-import DeleteWarehouse from "../DeleteWarehouse/DeleteWarehouse";
+import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import DeleteIcon from '../../assets/icons/delete_outline-24px.svg';
+import EditIcon from '../../assets/icons/edit-24px.svg';
+import './WarehouseItems.scss';
+import DeleteWarehouse from '../DeleteWarehouse/DeleteWarehouse';
+import { useParams } from 'react-router-dom';
 
 const List = ({ warehouses }) => {
   // const [deletingWarehouse, setDeletingWarehouse] = useState(null)
