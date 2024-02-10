@@ -8,16 +8,16 @@ import DeleteWarehouse from '../DeleteWarehouse/DeleteWarehouse';
 import { useParams } from 'react-router-dom';
 
 const List = ({ warehouses }) => {
-  // const [deletingWarehouse, setDeletingWarehouse] = useState(null)
+  const [deletingWarehouse, setDeletingWarehouse] = useState(null)
 
-  // function deleteWarehouse(warehouse){
-  //     setDeletingWarehouse(warehouse)
-  // }
+  function deleteWarehouse(warehouse){
+      setDeletingWarehouse(warehouse)
+  }
 
-  // function onWarehouseDeleted(warehouse){
-  //     warehouses = warehouses.filter(item => item.id !== warehouse.id);
-  //     setDeletingWarehouse(null)
-  // }
+  function onWarehouseDeleted(warehouse){
+      warehouses = warehouses.filter(item => item.id !== warehouse.id);
+      setDeletingWarehouse(null)
+  }
     console.log(warehouses)
   return (
     <ul>
@@ -43,13 +43,13 @@ const List = ({ warehouses }) => {
             <p>{warehouse.contact_email}</p>
           </div>
           <div className="action--icons">
-            {/* <img src={DeleteIcon} onClick={() => setDeletingWarehouse(warehouse)} alt="delete" /> */}
+            <img src={DeleteIcon} onClick={() => setDeletingWarehouse(warehouse)} alt="delete" />
             <img src={EditIcon} alt="edit" />
           </div>
         </li>
       ))}
 
-      {/* {
+      {
             deletingWarehouse && (
             <DeleteWarehouse
                 warehouse={deletingWarehouse}
@@ -57,7 +57,7 @@ const List = ({ warehouses }) => {
                 onCancelled={() => setDeletingWarehouse(null)}
                 />
         )
-        } */}
+      }
     </ul>
   );
 };

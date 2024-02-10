@@ -9,7 +9,7 @@ function DeleteWarehouse({ warehouse, onDeleted, onCancelled }) {
   }
 
   function deleteWarehouse(){
-    axios.delete('http://localhost:8088/api/warehouse/' + warehouse.id)
+    axios.delete('http://localhost:8088/api/warehouses/' + warehouse.id)
       .then(response => {
         onDeleted(warehouse)
       })
