@@ -1,5 +1,5 @@
 const knex = require('knex')(require('../DB Setup/knexfile'));
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 
 exports.fetchInventories = async () => {
   try {

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const knex = require('knex')(require('../../DB Setup/knexfile'));
-const { fetchInventories, addInventoryItem} = require("../../controllers/inventoryControllers");
+const { fetchInventories, addInventoryItem} = require("../../Controllers/inventoryControllers");
 require('dotenv').config();
 
 router.get('/:id', async (req, res) => {
@@ -72,5 +72,24 @@ router.get('/cat/categories', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const item = await knex('inventories').where({ id: parseInt(id) }).first();
+
+    if (!item) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+
+    await knex('inventories')
+      .where({ id: id })
+      .del();
+
+    return res.status(204).json({message: "Inventory item deleted successfully"});
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
