@@ -5,6 +5,7 @@ import "./AddWarehouse.scss";
 import errorIcon from "../../assets/icons/error-24px.svg";
 import arrowBack from "../../assets/icons/arrow_back-24px.svg";
 import './AddWarehouse.scss';
+import { Link } from "react-router-dom";
 
 const AddWarehouse = () => {
   const [formData, setFormData] = useState({
@@ -26,12 +27,11 @@ const AddWarehouse = () => {
   const submitForm = async (event) => {
     event.preventDefault();
     const newWarehouse = {
-      id: uuidv4(),
       ...formData,
     };
 
     try {
-      await axios.post("http://localhost:8088/warehouses", newWarehouse);
+      await axios.post("http://localhost:8088/api/warehouses/", newWarehouse);
       setFormData({
         warehouse_name: "",
         address: "",
@@ -42,6 +42,7 @@ const AddWarehouse = () => {
         contact_phone: "",
         contact_email: "",
       });
+      alert("Warehouse successfully added!");
     } catch (error) {
       console.error("Oops! Error submitting form", error);
     }
@@ -50,7 +51,7 @@ const AddWarehouse = () => {
   return (
     <section className="addWarehouse">
       <div className="addWarehouse--heading">
-        <img className="addWarehouse--arrow" src={arrowBack} alt="Back" />
+        <Link to="http://localhost:3000/"><img className="addWarehouse--arrow" src={arrowBack} alt="Back" /></Link>
         <h1>Add New Warehouse</h1>
       </div>
       <form className="item-form" onSubmit={submitForm}>
@@ -154,12 +155,12 @@ const AddWarehouse = () => {
               className="itemform--input"
               type="text"
               placeholder="Contact Name"
-              name="contact_phone"
+              name="contact_name"
               required
-              value={formData.contact_phone}
+              value={formData.contact_name}
               onChange={handleChange}
             />
-            {formData.contact_phone === "" && (
+            {formData.contact_name === "" && (
               <div className="item-form__error">
                 <img
                   className="item-form__error-icon"
@@ -196,7 +197,7 @@ const AddWarehouse = () => {
             <label className="itemform--label">Phone Number</label>
             <input
               className="itemform--input"
-              type="number"
+              type="text"
               placeholder="Phone Number"
               name="contact_phone"
               required
@@ -242,9 +243,9 @@ const AddWarehouse = () => {
           </div>
         <div>
               <div className="action--items">
-                <button type="button" className="__button-cancel">
+                <Link to="http://localhost:3000/"><button type="button" className="__button-cancel">
                   Cancel
-                </button>
+                </button></Link>
                 <button type="submit" className="__button">
                   + Add Item
                 </button>
