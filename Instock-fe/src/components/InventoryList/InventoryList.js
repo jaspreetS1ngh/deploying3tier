@@ -5,7 +5,7 @@ import deleteIcon from '../../assets/icons/delete_outline-24px.svg';
 import editIcon from '../../assets/icons/edit-24px.svg';
 import rightIcon from '../../assets/icons/chevron_right-24px.svg';
 import './InventoryList.scss';
-//import DeleteItem from '../DeleteItem/DeleteItem';
+import DeleteInventory from '../DeleteInventory/DeleteInventory';
 
 const InventoryList = () => {
     const [inventoryList, setInventoryList] = useState([]);
@@ -99,13 +99,13 @@ const InventoryList = () => {
     ))}
   </div>
 </>
-            {/* {deletingInventory ? <DeleteInventory
+            {deletingInventory ? <DeleteInventory
                 inventory={deletingInventory}
                 onDeleted={onInventoryDeleted}
                 onCancelled={() => setDeletingInventory(null)}
                 />
                 :<></>
-            } */}
+            }
         </>
       );
     };
