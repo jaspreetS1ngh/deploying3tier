@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const knex = require('knex')(require('../../DB Setup/knexfile'));
-const { fetchInventories, addInventoryItem} = require("../../controllers/inventoryControllers");
+const { fetchInventories, addInventoryItem} = require("../../Controllers/inventoryControllers");
 require('dotenv').config();
 
 router.get('/:id', async (req, res) => {

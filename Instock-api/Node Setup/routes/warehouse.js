@@ -65,6 +65,25 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const warehouse = await fetchWarehouseByIdFromDb(id);
+
+    if (!warehouse) {
+      return res.status(404).json({ message: "Warehouse does not exist. Please check and try again" });
+    }
+
+    await knex('warehouses')
+      .where({ id: id })
+      .del();
+
+    return res.status(204).json({message: "Warehouse deleted successfully"});
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const {
@@ -118,46 +137,6 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-//list of available warehouses
-router.get('/list/warehouses', async (req, res) => {
-  try {
-    const uniqueWarehouses = await knex('warehouses').distinct('warehouse_name');
-    res.status(200).json(uniqueWarehouses);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-// edit warehouse
-router.put('/:id', async (req, res) => {
-  const { id } = req.params;
-  const { warehouse_name, address, city, country, contact_name, contact_position, contact_phone, contact_email } = req.body;
-  
-  try {
-    const updatedWarehouse = await knex('warehouses')
-      .where({ id: parseInt(id) })
-      .update({
-        warehouse_name,
-        address,
-        city,
-        country,
-        contact_name,
-        contact_position,
-        contact_phone,
-        contact_email
-      });
-
-    if (updatedWarehouse) {
-      res.json({ success: true, message: `Warehouse with id ${id} updated successfully.` });
-    } else {
-      res.status(404).json({ error: 'Warehouse not found' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
