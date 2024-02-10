@@ -8,7 +8,7 @@ import Warehouse from "./components/Warehouse/Warehouse";
 import WarehouseDetails from "./components/Warehouse Details/WarehouseDetails";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import EditWarehouse from "./components/editwarehouse/EditWarehouse";
+// import EditWarehouse from "./components/editwarehouse/EditWarehouse";
 // import AddWarehouse from "./components/addwarehouse/AddWarehouse";
 // import Inventory from "./components/pages/inventory/Inventory";
 import InventoryDetails from "./components/inventoryDetails/InventoryDetails";
@@ -29,8 +29,8 @@ function App() {
       try {
         const urlAPI = "http://localhost:8088/api/warehouses";
         const response = await Axios.get(urlAPI);
-        setWarehouses(response.data.warehouseListed);
-        console.log(response.data.warehouseListed);
+        setWarehouses(response.data.warehouseList);
+        console.log(response.data.warehouseList);
       } catch (error) {
         console.error("Error fetching warehouse:", error.message);
       }
@@ -57,7 +57,8 @@ function App() {
             />
             <Route path="/warehouse/:id" element={<WarehouseDetails />} />
             {/* <Route path="/warehouse/add" element={<AddWarehouse />} /> */}
-            <Route path="/warehouse/:id/edit" element={<EditWarehouse />} />
+
+            {/*<Route path="/warehouse/:id/edit" element={<EditWarehouse />} />*/}
 
             {/* Inventory routes */}
             {/* <Route path="/inventory" element={<Inventory />} />*/}
