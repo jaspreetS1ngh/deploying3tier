@@ -4,6 +4,7 @@ import axios from 'axios';
 import './AddInventory.scss';
 import errorIcon from '../../assets/icons/error-24px.svg';
 import arrowBack from '../../assets/icons/arrow_back-24px.svg';
+import { Link } from 'react-router-dom';
 
 const AddInventory = () => {
     const [formData, setFormData] = useState({
@@ -84,6 +85,7 @@ const AddInventory = () => {
                 </div>
                 <div className="addInventory__container">
                     <form className="item-form" onSubmit={submitForm}>
+                    <div className="item-form__details-availability-container">
                         <div className="item-form__details">
                             <h2 className="item-form__title">Item Details</h2>
                             {/* Item Name Input */}
@@ -185,10 +187,10 @@ const AddInventory = () => {
                                     ))}
                                 </select>
                         </div>
-
+                        </div>
                         <div className="item-form__button">
                             <div className="item-form__button-container">
-                                <button type="button" className="item-form__button-cancel">Cancel</button>
+                                <Link to={`/inventory`}><button type="button" className="item-form__button-cancel">Cancel</button></Link>
                                 <button type="submit" className="item-form__button-add">+ Add Item</button>
                             </div>
                         </div>
