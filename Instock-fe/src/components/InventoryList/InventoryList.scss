@@ -26,6 +26,10 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 2rem 4%; 
+    @include medium {
+
+      width: 100%
+    }
 
     &-container {
         width: 60%;
@@ -40,6 +44,10 @@
       margin-right: 1rem;
       margin-left: 1rem;
       justify-content: flex-end;
+      @include medium {
+        margin-right: 0;
+
+      }
     
   }
   &__search {
@@ -58,6 +66,9 @@
       outline: none;
       border: 0.0625rem solid $primaryMedium; 
     }
+    @include medium {
+      width: 9.125rem; 
+    }
 
   }
   &__button {
@@ -69,6 +80,9 @@
     margin-bottom: 0.3125rem; 
     width: 8.125rem; 
     height: 2.44rem; 
+    @include medium {
+      width: 7.8rem; 
+    }
 
 
     &:hover {
@@ -89,11 +103,9 @@
     padding: 0.625rem 0; 
     margin-left: 3rem;
     @include medium {
-      display: flex;
-      justify-content: space-between;
-      height: 2.5rem; 
-      background-color: $backgroundLight;
-      margin: 0 4%;
+    margin-left: 0;
+    font-size: 0.8rem;
+    margin-left: 1rem;
     }
   }
   
@@ -127,7 +139,11 @@
         justify-content: space-between;
         padding: 0.625rem 0; 
         margin-left: 3rem;
+      @include medium {
+        margin-left: 1rem;
+        font-size: 0.8rem;
       }
+    }
     &-detail{
     flex: 1;
     text-align: left;
@@ -165,6 +181,9 @@
     padding: 0.8rem 0;
     border-radius: 1.25rem; 
     max-width: 6rem;
+    @include medium {
+      max-width: 5rem;
+    }
     }
    
     &--out-of-stock {
@@ -173,6 +192,9 @@
       padding: 0.9rem 0; 
       border-radius: 1.25rem; 
       max-width: 7rem;
+      @include medium {
+        max-width: 6rem;
+      }
   }
 
   }

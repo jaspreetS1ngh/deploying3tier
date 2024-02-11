@@ -46,6 +46,11 @@
   justify-content: space-between;
   padding: 2rem 4%;
 }
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__form {
+    width: 100%;
+  }
+}
 .inventoryList__form-container {
   width: 60%;
 }
@@ -57,6 +62,11 @@
   margin-right: 1rem;
   margin-left: 1rem;
   justify-content: flex-end;
+}
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__form-sub {
+    margin-right: 0;
+  }
 }
 .inventoryList__search {
   background-image: url("../../assets/icons/search-24px.svg");
@@ -76,6 +86,11 @@
   outline: none;
   border: 0.0625rem solid #2e66e5;
 }
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__search {
+    width: 9.125rem;
+  }
+}
 .inventoryList__button {
   background-color: #2e66e5;
   color: #ffffff;
@@ -85,6 +100,11 @@
   margin-bottom: 0.3125rem;
   width: 8.125rem;
   height: 2.44rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__button {
+    width: 7.8rem;
+  }
 }
 .inventoryList__button:hover {
   background-color: #13182c;
@@ -105,11 +125,9 @@
 }
 @media only screen and (min-width: 768px) and (max-width: 1279px) {
   .inventoryList__categories {
-    display: flex;
-    justify-content: space-between;
-    height: 2.5rem;
-    background-color: #f7f8f9;
-    margin: 0 4%;
+    margin-left: 0;
+    font-size: 0.8rem;
+    margin-left: 1rem;
   }
 }
 .inventoryList__category-title {
@@ -140,6 +158,12 @@
   justify-content: space-between;
   padding: 0.625rem 0;
   margin-left: 3rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__item-row {
+    margin-left: 1rem;
+    font-size: 0.8rem;
+  }
 }
 .inventoryList__item-detail {
   flex: 1;
@@ -176,12 +200,22 @@
   border-radius: 1.25rem;
   max-width: 6rem;
 }
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__item-detail-status--in-stock {
+    max-width: 5rem;
+  }
+}
 .inventoryList__item-detail-status--out-of-stock {
   background: rgba(255, 0, 0, 0.07);
   color: #c94515;
   padding: 0.9rem 0;
   border-radius: 1.25rem;
   max-width: 7rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 1279px) {
+  .inventoryList__item-detail-status--out-of-stock {
+    max-width: 6rem;
+  }
 }
 
 button {
