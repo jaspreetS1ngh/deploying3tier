@@ -22,9 +22,8 @@ Third-party Libraries: Incorporated third-party libraries for dropdowns and moda
 
 ### Tools and Technologies:
 
-Front-end: create-react-app, react-router-dom, BEM/SASS
-Back-end: Node, Express, MySQL, Knex
-Workflow: Git, GitHub, Jira, Scrum methodology
-Design: Figma
-Additional Tools: npm, Postman, browser development tools
-Task Management:
+- Front-end: create-react-app, react-router-dom, BEM/SASS
+- Back-end: Node, Express, MySQL, Knex
+- Workflow: Git, GitHub, Jira, Scrum methodology
+- Design: Figma
+- Additional Tools: npm, Postman, browser development tools
