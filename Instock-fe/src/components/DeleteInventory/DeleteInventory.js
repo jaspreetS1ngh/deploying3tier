@@ -9,7 +9,15 @@ function DeleteInventory({ inventory, onDeleted, onCancelled }) {
   }
 
   function deleteInventory(){
-    onDeleted(inventory)
+    axios.delete('http://localhost:8088/api/inventories/' + inventory.id)
+      .then(response => {
+        onDeleted(inventory)
+      })
+      .catch(error => {
+        console.error(error);
+        onCancelled()
+        alert(error.response.data.message)
+      })
   }
   
 
