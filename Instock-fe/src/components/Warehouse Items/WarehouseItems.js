@@ -43,7 +43,7 @@ const List = ({ warehouses }) => {
             <p>{warehouse.contact_phone}</p>
             <p>{warehouse.contact_email}</p>
           </div>
-          <div className="action--icons">
+          <div className="action-icons">
           <Link to={`/warehouse/${warehouse.id}/edit`}><img src={EditIcon}  alt="Edit" /></Link>
           <button onClick={() => setDeletingWarehouse(warehouse)}><img src={DeleteIcon} alt="Delete" /></button>
           </div>
