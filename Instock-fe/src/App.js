@@ -1,4 +1,4 @@
-// import "./App.scss";
+import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import components
@@ -44,6 +44,7 @@ function App() {
       <div className="App" id="App">
         <BrowserRouter>
           <Header />
+          <main>
           <Routes>
             {/* Warehouse routes */}
             <Route
@@ -67,6 +68,7 @@ function App() {
             <Route path="/inventory/add" element={<AddInventory />} />
             {/* <Route path="/inventory/:id/delete" element={<DeleteInventory />} /> */}
           </Routes>
+          </main>
           <Footer />
         </BrowserRouter>
       </div>
