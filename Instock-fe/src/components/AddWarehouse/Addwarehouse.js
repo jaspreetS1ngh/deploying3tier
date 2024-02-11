@@ -7,7 +7,7 @@ import arrowBack from "../../assets/icons/arrow_back-24px.svg";
 import './AddWarehouse.scss';
 import { Link } from "react-router-dom";
 
-const AddWarehouse = () => {
+const AddWarehouse = ({ setWarehouses }) => {
   const [formData, setFormData] = useState({
     warehouse_name: "",
     address: "",
@@ -32,6 +32,8 @@ const AddWarehouse = () => {
 
     try {
       await axios.post("http://localhost:8088/api/warehouses/", newWarehouse);
+      setWarehouses((prevWarehouses) => [...prevWarehouses, newWarehouse]);
+
       setFormData({
         warehouse_name: "",
         address: "",
