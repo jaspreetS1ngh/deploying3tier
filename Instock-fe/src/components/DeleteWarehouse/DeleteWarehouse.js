@@ -9,12 +9,14 @@ function DeleteWarehouse({ warehouse, onDeleted, onCancelled }) {
   }
 
   function deleteWarehouse(){
-    axios.delete('http://localhost:8088/api/warehouse/' + warehouse.id)
+    axios.delete('http://localhost:8088/api/warehouses/' + warehouse.id)
       .then(response => {
         onDeleted(warehouse)
       })
       .catch(error => {
         console.error(error);
+        onCancelled()
+        alert(error?.response?.data?.message || 'An error occurred')
       })
 
   }
@@ -25,7 +27,7 @@ function DeleteWarehouse({ warehouse, onDeleted, onCancelled }) {
     <div className="delete">
       
       <div className="delete__content">
-        <h1 className="delete__content--title">Delete {warehouse.name} warehouse?</h1>
+        <h1 className="delete__content--title">Delete {warehouse.warehouse_name} warehouse?</h1>
         <span className="delete__content--close" onClick={cancelDeletion}>&times;</span>
 
         <div className="delete__content--text">

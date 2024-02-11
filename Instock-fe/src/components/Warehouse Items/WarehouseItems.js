@@ -10,16 +10,15 @@ import DeleteWarehouse from '../DeleteWarehouse/DeleteWarehouse';
 import { useParams } from 'react-router-dom';
 
 const List = ({ warehouses }) => {
-  // const [deletingWarehouse, setDeletingWarehouse] = useState(null)
+  const [deletingWarehouse, setDeletingWarehouse] = useState(null)
 
-  // function deleteWarehouse(warehouse){
-  //     setDeletingWarehouse(warehouse)
-  // }
+  function deleteWarehouse(warehouse){
+      setDeletingWarehouse(warehouse)
+  }
 
-  // function onWarehouseDeleted(warehouse){
-  //     warehouses = warehouses.filter(item => item.id !== warehouse.id);
-  //     setDeletingWarehouse(null)
-  // }
+  function onWarehouseDeleted(warehouse){
+    setDeletingWarehouse(null)
+  }
     console.log(warehouses)
   return (
     <ul>
@@ -46,12 +45,12 @@ const List = ({ warehouses }) => {
           </div>
           <div className="action--icons">
           <Link to={`/warehouse/${warehouse.id}/edit`}><img src={EditIcon}  alt="Edit" /></Link>
-          <button ><img src={DeleteIcon} alt="Delete" /></button>
+          <button onClick={() => setDeletingWarehouse(warehouse)}><img src={DeleteIcon} alt="Delete" /></button>
           </div>
         </li>
       ))}
 
-      {/* {
+      {
             deletingWarehouse && (
             <DeleteWarehouse
                 warehouse={deletingWarehouse}
@@ -59,7 +58,7 @@ const List = ({ warehouses }) => {
                 onCancelled={() => setDeletingWarehouse(null)}
                 />
         )
-        } */}
+      }
     </ul>
   );
 };
