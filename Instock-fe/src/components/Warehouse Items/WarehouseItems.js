@@ -4,21 +4,26 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '../../assets/icons/delete_outline-24px.svg';
 import EditIcon from '../../assets/icons/edit-24px.svg';
 import rightIcon from '../../assets/icons/chevron_right-24px.svg';
+import { useEffect } from 'react';
 
 import './WarehouseItems.scss';
 import DeleteWarehouse from '../DeleteWarehouse/DeleteWarehouse';
 import { useParams } from 'react-router-dom';
 
-const List = ({ warehouses }) => {
+const List = ({ warehouses,setWarehouses  }) => {
   const [deletingWarehouse, setDeletingWarehouse] = useState(null)
 
   function deleteWarehouse(warehouse){
       setDeletingWarehouse(warehouse)
   }
 
-  function onWarehouseDeleted(warehouse){
-    setDeletingWarehouse(null)
+  function onWarehouseDeleted(warehouseId) {
+    setDeletingWarehouse(null);
+    setWarehouses(prevWarehouses =>
+      prevWarehouses.filter(warehouse => warehouse.id !== warehouseId)
+    );   
   }
+  
     console.log(warehouses)
   return (
     <ul>
@@ -52,12 +57,11 @@ const List = ({ warehouses }) => {
 
       {
             deletingWarehouse && (
-            <DeleteWarehouse
-                warehouse={deletingWarehouse}
-                onDeleted={onWarehouseDeleted}
-                onCancelled={() => setDeletingWarehouse(null)}
-                />
-        )
+              <DeleteWarehouse
+              warehouse={deletingWarehouse}
+              onDeleted={() => onWarehouseDeleted(deletingWarehouse.id)}
+              onCancelled={() => setDeletingWarehouse(null)}
+            />)
       }
     </ul>
   );

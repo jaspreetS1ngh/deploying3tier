@@ -50,7 +50,7 @@ function App() {
             <Route
               path="/"
               exact
-              element={<Warehouse warehouses={warehouses} />}
+              element={<Warehouse warehouses={warehouses} setWarehouses={setWarehouses} />}
             />
             <Route
               path="/warehouse"

@@ -4,22 +4,26 @@ import { useParams } from 'react-router-dom';
 import "./DeleteWarehouse.scss";
 
 function DeleteWarehouse({ warehouse, onDeleted, onCancelled }) {
-  function cancelDeletion(){
-    onCancelled()
+ 
+  function cancelDeletion() {
+    console.log('Cancelled deletion.');
+    onCancelled();
   }
 
-  function deleteWarehouse(){
-    axios.delete('http://localhost:8088/api/warehouses/' + warehouse.id)
+  function deleteWarehouse() {
+    axios.delete(`http://localhost:8088/api/warehouses/${warehouse.id}`)
       .then(response => {
-        onDeleted(warehouse)
+        console.log('Warehouse deleted successfully:', response.data);
+        onDeleted(warehouse.id);
       })
       .catch(error => {
-        console.error(error);
-        onCancelled()
-        alert(error?.response?.data?.message || 'An error occurred')
-      })
-
+        console.error('Error deleting warehouse:', error);
+        onCancelled();
+        alert(error?.response?.data?.message || 'An error occurred');
+      });
   }
+
+  console.log('Rendering DeleteWarehouse component.');
   
 
   
