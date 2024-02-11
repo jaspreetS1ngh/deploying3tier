@@ -144,13 +144,14 @@ router.post("/", async (req, res) => {
 //list of available warehouses
 router.get('/list/warehouses', async (req, res) => {
   try {
-    const uniqueWarehouses = await knex('warehouses').distinct('warehouse_name');
-    res.status(200).json(uniqueWarehouses);
+    const warehouses = await knex('warehouses').select('id', 'warehouse_name');
+    res.status(200).json(warehouses);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // edit warehouse
 router.put('/:id', async (req, res) => {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 import "./EditInventory.scss";
+import arrowBack from '../../assets/icons/arrow_back-24px.svg';
 
 function EditInventory() {
   const [itemDetails, setItemDetails] = useState({
@@ -13,12 +14,16 @@ function EditInventory() {
     warehouse_id: '',
     warehouse_name:''
   });
+
   const [categories, setCategories] = useState([]);
   const [warehouses, setWarehouses] = useState([]);
 
   const { id } = useParams();
+
   useEffect(() => {
     fetchData(id);
+    fetchCategories();
+    fetchWarehouses();
   }, [id]);
 
   const fetchData = async (parmid) => {
@@ -29,7 +34,7 @@ function EditInventory() {
       if (currentItem) {
         const warehouseResponse = await axios.get(`http://localhost:8088/api/warehouses/${currentItem.warehouse_id}`);
         const warehouseData = warehouseResponse.data;
-        
+
         setItemDetails({
           item_name: currentItem.item_name,
           description: currentItem.description,
@@ -46,8 +51,7 @@ function EditInventory() {
       console.error('Error fetching data:', error);
     }
   };
-  
-  
+
   const fetchCategories = async () => {
     try {
       const response = await axios.get('http://localhost:8088/inventory/cat/categories');
@@ -56,138 +60,150 @@ function EditInventory() {
       console.error('Error fetching categories:', error);
     }
   };
-  useEffect(() => {
-    fetchData(id);
-    fetchCategories();
-    fetchWarehouses();
-  }, [id]);
-    
-const fetchWarehouses = async () => {
-  try {
-    const response = await axios.get('http://localhost:8088/api/warehouses/list/warehouses');
-    setWarehouses(response.data);
-  } catch (error) {
-    console.error('Error fetching warehouses:', error);
-  }
-};
 
+  const fetchWarehouses = async () => {
+    try {
+      const response = await axios.get('http://localhost:8088/api/warehouses/list/warehouses');
+      setWarehouses(response.data);
+    } catch (error) {
+      console.error('Error fetching warehouses:', error);
+    }
+  };
 
-
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  if (name === "warehouse_name") {
-    setItemDetails(prevDetails => ({
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setItemDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value
     }));
-  } else {
-    setItemDetails(prevDetails => ({
-      ...prevDetails,
-      [name]: value
-    }));
-  }
-};
+  };
 
-
-
-const handleSave = async () => {
-  try {
-    const selectedWarehouse = warehouses.find(warehouse => warehouse.warehouse_name == itemDetails.warehouse_name);
-    if (!selectedWarehouse) {
-      alert('Selected warehouse not found.');
-      return;
-  }
-  console.log(selectedWarehouse);
-    const response = await axios.put(`http://localhost:8088/inventory/${id}`, {
-      ...itemDetails,
-      warehouse_id: selectedWarehouse.warehouse_id,
-      quantity: itemDetails.quantity
+  const handleSave = async () => {
+    try {
+      const selectedWarehouse = warehouses.find(warehouse => 
+        warehouse.warehouse_name.toLowerCase() === itemDetails.warehouse_name.toLowerCase()
+      );
       
-    });
-    console.log(response.data);
-  } catch (error) {
-    console.error('Error updating data:', error);
-  }
-};
+      if (!selectedWarehouse) {
+        alert('Selected warehouse not found.');
+        return;
+      }
+      
+      console.log(selectedWarehouse);
+      const response = await axios.put(`http://localhost:8088/inventory/${id}`, {
+        ...itemDetails,
+        warehouse_id: selectedWarehouse.id, 
+        quantity: itemDetails.quantity
+      });
 
-  
+      console.log(response.data);
+          alert('Data saved successfully!');
+
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
+  };
+
   return (
-    <div className="edit">
-      <h1>Item Details</h1>
-      <form className="edit__form">
-        <div className="edit__form-first">
-          <label className="edit__form-first--name">Item Name</label>
-          <input
-            type="text"
-            name="item_name"
-            value={itemDetails.item_name}
-            onChange={handleChange}
-            className="edit__form-name--value"
-          />
-          <label className="edit__form-first--description">Description</label>
-          <input
-            type="text"
-            name="description"
-            value={itemDetails.description}
-            onChange={handleChange}
-            className="edit__form-description--value"
-          />
-          <select
+    <section className="editInventory">
+      {/* edit inventory item */}
+      <div className="editInventory__heading">
+      <Link to='/inventory'><img src={arrowBack} alt="Back arrow" className="editInventory__heading-arrow"/></Link>
+        <h1 className="editInventory__heading-title">Edit Inventory Item</h1>
+      </div>
+      {/* Item Details  */}
+      <div className="editInventory__container">
+        <form className="item-form">
+          <div className="item-form__details">
+            <h2 className="item-form__title">Item Details</h2>
+            {/* Item Name Input */}
+            <label className="item-form__label">Item Name</label>
+            <input
+              className="item-form__input"
+              type="text"
+              placeholder="Item Name"
+              name="item_name"
+              value={itemDetails.item_name}
+              onChange={handleChange}
+            />
+            {/* Description Input */}
+            <label className="item-form__label">Description</label>
+            <textarea
+              type="text"
+              name="description"
+              value={itemDetails.description}
+              onChange={handleChange}
+              className="item-form__description-input"
+            />
+            {/* Category Select */}
+            <label className="item-form__label">Category</label>
+            <select
               name="category"
               value={itemDetails.category}
               onChange={handleChange}
-              className="edit__form-category--value">
+              className="item-form__dropdown">
               {categories.map((category, index) => (
                 <option key={index} value={category.category}>
                   {category.category}
                 </option>
               ))}
-          </select>
-        </div>
-        <div className="edit__form-second">
-          <h3>Item Availability</h3>
-          <div className="edit__form-second--status">
-            <label>
-              <input type="radio" name="status" value="In Stock"  checked={itemDetails.status === 'In Stock'} onChange={handleChange}/>
-              In Stock</label>
-            <label>
-              <input type="radio" name="status" value="Out of Stock" checked={itemDetails.status === 'Out of Stock'} onChange={handleChange}/>
-              Out of Stock
-            </label>
+            </select>
           </div>
-
-          {itemDetails.status === 'In Stock' && (
-            <div className="edit__form-second--quantity">
-              <label>Quantity</label>
-              <input type="text" name="quantity" value={itemDetails.quantity} onChange={handleChange} className="edit__form-quantity--value"/>
+          <div className="item-form__line"></div>
+          {/* Item Availability */}
+          <div className="item-form__availability">
+            <h2 className="item-form__title">Item Availability</h2>
+            {/* Status Radio Inputs */}
+            <label className="item-form__label">Status</label>
+            <div className="item-form__status">
+              <div className="item-form__status-container">
+                <input type="radio"
+                       name="status" 
+                       value="In Stock"  
+                       checked={itemDetails.status === 'In Stock'} 
+                       onChange={handleChange}/>
+                <p className="item-form__status-container-text">In stock</p> 
+              </div>
+              <div className="item-form__status-container">
+                <input type="radio"
+                       name="status" 
+                       value="Out of Stock" 
+                       checked={itemDetails.status === 'Out of Stock'} 
+                       onChange={handleChange}/>
+                <p className="item-form__status-container-text">Out of stock</p>
+              </div>
             </div>
-          )}
-          <select
+            {itemDetails.status === 'In Stock' && (
+              <div className="edit__form-second--quantity">
+                <label>Quantity</label>
+                <input type="text" name="quantity" value={itemDetails.quantity} onChange={handleChange} className="edit__form-quantity--value"/>
+              </div>
+            )}
+            <label className="item-form__label">Warehouse</label>
+            <select
+              className="item-form__dropdown"
               name="warehouse_name"
               value={itemDetails.warehouse_name}
               onChange={handleChange}
-              className="edit__form-second--warehouse---value"
             >
               {warehouses.map((warehouse) => (
-                <option key={warehouse.id} value={warehouse.id}>
+                <option key={warehouse.id} value={warehouse.warehouse_name}>
                   {warehouse.warehouse_name}
                 </option>
               ))}
             </select>
-
-
-          <div className="edit__form-second--buttons">
-            <button type="button" className="edit__form-second--buttons---cancel">
-              CANCEL
-            </button>
-            <button type="button" className="edit__form-second--buttons---save" onClick={handleSave}>
-              SAVE
+            <div className="item-form__button">
+              <a href='/inventory' className="item-form__button-cancel">
+                CANCEL
+              </a>
+              <button type="button" className="item-form__button-add" onClick={handleSave}>
+                SAVE
               </button>
+            </div>
           </div>
-        
-          </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </section>
   );
 }
 

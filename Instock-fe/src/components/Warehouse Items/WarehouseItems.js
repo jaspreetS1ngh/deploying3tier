@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DeleteIcon from '../../assets/icons/delete_outline-24px.svg';
+import DeleteIcon from '../../assets/icons/chevron_right-24px.svg';
 import EditIcon from '../../assets/icons/edit-24px.svg';
+import rightIcon from '../../assets/icons/chevron_right-24px.svg';
+
 import './WarehouseItems.scss';
 import DeleteWarehouse from '../DeleteWarehouse/DeleteWarehouse';
 import { useParams } from 'react-router-dom';
@@ -42,8 +44,8 @@ const List = ({ warehouses }) => {
             <p>{warehouse.contact_email}</p>
           </div>
           <div className="action--icons">
-            <img src={DeleteIcon} onClick={() => setDeletingWarehouse(warehouse)} alt="delete" />
-            <img src={EditIcon} alt="edit" />
+          <Link to={`/warehouse/${warehouse.id}/edit`}><img src={EditIcon}  alt="Edit" /></Link>
+          <button onClick={() => setDeletingWarehouse(warehouse)}><img src={DeleteIcon} alt="Delete" /></button>
           </div>
         </li>
       ))}

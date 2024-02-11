@@ -7,7 +7,7 @@ import './warehousedetails.scss';
 import EditIcon from '../../assets/icons/edit-24px.svg';
 import Dropdown from '../../assets/icons/arrow_drop_down-24px.svg';
 import WarehouseInventory from '../WarehouseInventory/WarehouseInventory';
-
+import { Link } from "react-router-dom";
 
 export default function WarehouseDetails() {
   const { id } = useParams();
@@ -38,17 +38,13 @@ export default function WarehouseDetails() {
     
   }
 
-//   if (inventoryDetails.warehouse_id === id){
-//     return (invent)
-//   }
-
   useEffect(() => {
     getWarehouseDetails();
-  });
+  },[]);
 
   useEffect(() =>{
     getInventoryDetails();
-  })
+  },[])
 
 
   
@@ -58,12 +54,12 @@ export default function WarehouseDetails() {
 
             <div className="warehouseDetails--heading">
                 <div className="warehouseDetails--title">
-                    <img className="warehouseDetails--arrow" src={arrowBack} alt="Back" />
+                <Link to={`/warehouse/`}><img className="warehouseDetails--arrow" src={arrowBack} alt="Back" /></Link>
                     <h1>{warehouseDetails.warehouse_name}</h1>
                 </div>
                 <div className="warehouseDetails--editsection">
                     <button className="__button">
-                        <img src={EditIcon} alt="Edit"/>
+                    <Link to={`/warehouse/${warehouseDetails.id}/edit`}><img src={EditIcon}  alt="Edit" /></Link>
                         Edit
                     </button>
                 </div>
