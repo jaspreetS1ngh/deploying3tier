@@ -1,5 +1,5 @@
 const knex = require('knex')(require('../DB Setup/knexfile'));
-// const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 exports.fetchInventories = async () => {
   try {
@@ -24,22 +24,29 @@ const fetchWarehouseByNameFromDb = async (warehouseName) => {
 exports.addInventoryItem = async (req, res) => {
   const { item_name, description, category, status, quantity, warehouse_id } = req.body;
 
-  if (!item_name || !description || !category || !status || !quantity || !warehouse_id) {
+  if (!item_name || !description || !category || !status || !warehouse_id) {
     return res.status(400).send("Please make sure to fill out all required fields.");
   }
-
+  if (status === 'In Stock' && (quantity == null || quantity <= 0)) {
+    return res.status(400).send("For 'In Stock' items, quantity must be provided and greater than 0.");
+  }
   const warehouseExists = await knex('warehouses').where({ id: warehouse_id }).first();
   if (!warehouseExists) {
     return res.status(404).send("Warehouse not found.");
   }
-
+  let adjustedQuantity = quantity;
+  if (status === 'Out of Stock') {
+    adjustedQuantity = 0; 
+  } else if (status === 'In Stock' && quantity <= 0) {
+    return res.status(400).send("In Stock items must have a positive quantity.");
+  }
   try {
     const [newInventoryId] = await knex("inventories").insert({
       item_name,
       description,
       category,
       status,
-      quantity,
+      quantity: adjustedQuantity,
       warehouse_id
     }, 'id');
 
