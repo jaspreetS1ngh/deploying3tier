@@ -17,8 +17,9 @@ export default function InventoryDetails() {
     category: '',
     status: '',
     quantity:'',
-    warehouse_id:'',
-  }); 
+    warehouse_id: '',
+    warehouse_name:''
+  });
 
   const { id } = useParams();
   useEffect(() => {
@@ -26,65 +27,31 @@ export default function InventoryDetails() {
   }, [id]);
 
 const fetchData = async (parmid) => {
-    try {
-      const response = await axios.get(`http://localhost:8088/inventory/${parmid}`);
-      const currentItem = response.data;
-setItemDetails({
-          item_name: currentItem.item_name,
-          description: currentItem.description,
-          category: currentItem.category,
-          status: currentItem.status ,
-          quantity: currentItem.quantity,
-          warehouse_id: currentItem.warehouse_id,
-          
-        });
+  try {
+    const response = await axios.get(`http://localhost:8088/inventory/${parmid}`);
+    const currentItem = response.data;
 
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+    if (currentItem) {
+      const warehouseResponse = await axios.get(`http://localhost:8088/api/warehouses/${currentItem.warehouse_id}`);
+      const warehouseData = warehouseResponse.data;
 
-
-
-
-
-
-
-
-  // const getItemDetails = () => {
-  //   axios
-  //     .get(`http://localhost:8088/inventory/${id}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setItemDetails(res.data.inventoriesData[0]);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  const getWarehouseName = () => {
-    const url = `http://localhost:8088/api/warehouses/${itemDetails.warehouseid}`;
-    axios
-      .get(url)
-      .then((res) => {
-        setWarehouseName(res.data.warehouseData[0].warehouse_name);
-      })
-      .catch((error) => {
-        console.log(error);
+      setItemDetails({
+        item_name: currentItem.item_name,
+        description: currentItem.description,
+        category: currentItem.category,
+        status: currentItem.status ,
+        quantity: currentItem.quantity,
+        warehouse_id: currentItem.warehouse_id,
+        warehouse_name: warehouseData.warehouse_name 
       });
-    // });
-  };
+    } else {
+      console.error(`Item with id ${id} not found.`);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
 
-  // useEffect(() => {
-  //   getItemDetails();
-  // }, []);
-  useEffect(() => {
-    getWarehouseName();
-  }, [itemDetails]);
-
-  // const { item_name, category, description, status, quantity, warehouse_id } =
-  //   itemDetails;
 
   return (
     <>
@@ -101,7 +68,7 @@ setItemDetails({
               </div>
             </Link>
 
-            <h1 className="item-top__title">{itemDetails.name}</h1>
+            <h1 className="item-top__title" color="red">{itemDetails.item_name} </h1>
             <Link to={`/inventory/${id}/edit`}>
               <div className="item-top__edit">
                 <svg
@@ -183,7 +150,7 @@ setItemDetails({
                     WAREHOUSE
                   </h3>
                   <span className="item-bottom__right__warehouseText">
-                    {itemDetails.warehouseName}
+                    {itemDetails.warehouse_name}
                   </span>
                 </div>
               </div>
