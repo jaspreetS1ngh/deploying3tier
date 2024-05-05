@@ -5,11 +5,18 @@ require('dotenv').config();
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 module.exports = {
-  client: 'mysql2',
+  client: 'mysql2', // Specifies the database client
   connection: {
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    host: 'db',     // Typically the service name in docker-compose.yml
+    database: 'Instock', // Name of the database
+    user: 'root',   // Username for the database
+    password: 'root'  // Password for the database user
+  },
+  migrations: {
+    directory: './DBsetup/migrations'  // Path to the migrations directory
+  },
+  seeds: {
+    directory: './DBsetup/seeds'  // Path to the seeds directory
   }
 };
+

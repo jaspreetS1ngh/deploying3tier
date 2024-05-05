@@ -28,11 +28,11 @@ export default function InventoryDetails() {
 
 const fetchData = async (parmid) => {
   try {
-    const response = await axios.get(`http://localhost:8088/inventory/${parmid}`);
+    const response = await axios.get(`http://backend:8088/inventory/${parmid}`);
     const currentItem = response.data;
 
     if (currentItem) {
-      const warehouseResponse = await axios.get(`http://localhost:8088/api/warehouses/${currentItem.warehouse_id}`);
+      const warehouseResponse = await axios.get(`http://backend:8088/api/warehouses/${currentItem.warehouse_id}`);
       const warehouseData = warehouseResponse.data;
 
       setItemDetails({

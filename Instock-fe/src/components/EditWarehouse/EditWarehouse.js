@@ -23,7 +23,7 @@ const EditWarehouse = () => {
     const fetchWarehouseData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8088/api/warehouses/${id}`
+          `http://backend:8088/api/warehouses/${id}`
         );
         const warehouseData = response.data;
         setFormData({ ...warehouseData });
@@ -50,7 +50,7 @@ const EditWarehouse = () => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8088/api/warehouses/${id}`,
+        `http://backend:8088/api/warehouses/${id}`,
         formData
       );
       console.log(response.data);
@@ -64,7 +64,7 @@ const EditWarehouse = () => {
   return (
     <section className="editWarehouse">
       <div className="editWarehouse--heading">
-        <Link to="http://localhost:3000/">
+        <Link to="http://fe:3000/">
           <img className="addWarehouse--arrow" src={arrowBack} alt="Back" />
         </Link>
         <h1>Edit Warehouse</h1>

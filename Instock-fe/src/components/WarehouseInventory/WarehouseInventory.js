@@ -15,7 +15,7 @@ export default function AvailableItems() {
   useEffect(() => {
   const getWarehouseDetails = async () => {
     try {
-      const urlAPI = `http://localhost:8088/api/warehouses/${id}`;
+      const urlAPI = `http://backend:8088/api/warehouses/${id}`;
       const response = await axios.get(urlAPI);
       setWarehouseDetails(response.data);
     } catch (error) {
@@ -27,7 +27,7 @@ export default function AvailableItems() {
   useEffect(() => {
   const getInventoryDetails = async () => {
     try {
-      const urlAPI = `http://localhost:8088/inventory/`;
+      const urlAPI = `http://backend:8088/inventory/`;
       const response = await axios.get(urlAPI);
       setInventoryDetails(response.data);
       console.log(response.data);

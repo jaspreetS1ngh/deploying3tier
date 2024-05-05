@@ -31,7 +31,7 @@ const AddWarehouse = ({ setWarehouses }) => {
     };
 
     try {
-      await axios.post("http://localhost:8088/api/warehouses/", newWarehouse);
+      await axios.post("http://localhost:backend/api/warehouses/", newWarehouse);
       setWarehouses((prevWarehouses) => [...prevWarehouses, newWarehouse]);
 
       setFormData({
@@ -245,7 +245,7 @@ const AddWarehouse = ({ setWarehouses }) => {
           </div>
         <div>
               <div className="action--items">
-                <Link to="http://localhost:3000/"><button type="button" className="__button-cancel">
+                <Link to="http://fe:3000/"><button type="button" className="__button-cancel">
                   Cancel
                 </button></Link>
                 <button type="submit" className="__button">

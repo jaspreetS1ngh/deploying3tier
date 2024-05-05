@@ -20,7 +20,7 @@ const AddInventory = () => {
     useEffect(() => {
         const fetchWarehouses = async () => {
             try {
-                const response = await axios.get('http://localhost:8088/api/warehouses');
+                const response = await axios.get('http://backend:8088/api/warehouses');
                 setWarehouses(response.data.warehouseList); // Set the warehouse list from the response
             } catch (error) {
                 console.error('Error fetching warehouses:', error);
@@ -59,7 +59,7 @@ const AddInventory = () => {
         };
     
         try {
-            const response = await axios.post("http://localhost:8088/inventory/add", addItem);
+            const response = await axios.post("http://backend:8088/inventory/add", addItem);
             const newInventoryId = response.data.id; 
             alert('Item added successfully with ID: ' + newInventoryId);
             setFormData({

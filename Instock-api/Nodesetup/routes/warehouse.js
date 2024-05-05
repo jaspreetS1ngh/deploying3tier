@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^\+\d{1,3}\s?\(\d{1,4}\)\s?\d{1,4}-?\d{1,4}$/;
-const knex = require('knex')(require('../../DB Setup/knexfile'));
+const knex = require('knex')(require('../../DBsetup/knexfile'));
 const cors = require('cors');
 router.use(cors());
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const knex = require('knex')(require('../../DB Setup/knexfile'));
+const knex = require('knex')(require('../../DBsetup/knexfile'));
 const { fetchInventories, addInventoryItem} = require("../../Controllers/inventoryControllers");
 require('dotenv').config();
 

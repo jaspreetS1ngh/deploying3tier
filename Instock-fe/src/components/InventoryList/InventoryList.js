@@ -14,7 +14,7 @@ const InventoryList = () => {
     const [deletingInventory, setDeletingInventory] = useState(null)
   
     useEffect(() => {
-      axios.get('http://localhost:8088/inventory')
+      axios.get('http://backend:8088/inventory')
         .then(response => {
           setInventoryList(response.data);
         })
@@ -27,7 +27,7 @@ const InventoryList = () => {
     useEffect(() => {
       const fetchWarehouses = async () => {
         try {
-          const response = await axios.get('http://localhost:8088/api/warehouses');
+          const response = await axios.get('http://backend:8088/api/warehouses');
           console.log("Warehouses data:", response.data); 
           setWarehouses(response.data.warehouseList);
         } catch (error) {

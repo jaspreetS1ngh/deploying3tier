@@ -28,11 +28,11 @@ function EditInventory() {
 
   const fetchData = async (parmid) => {
     try {
-      const response = await axios.get(`http://localhost:8088/inventory/${parmid}`);
+      const response = await axios.get(`http://backend:8088/inventory/${parmid}`);
       const currentItem = response.data;
   
       if (currentItem) {
-        const warehouseResponse = await axios.get(`http://localhost:8088/api/warehouses/${currentItem.warehouse_id}`);
+        const warehouseResponse = await axios.get(`http://backend:8088/api/warehouses/${currentItem.warehouse_id}`);
         const warehouseData = warehouseResponse.data;
 
         setItemDetails({
@@ -54,7 +54,7 @@ function EditInventory() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:8088/inventory/cat/categories');
+      const response = await axios.get('http://backend:8088/inventory/cat/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -63,7 +63,7 @@ function EditInventory() {
 
   const fetchWarehouses = async () => {
     try {
-      const response = await axios.get('http://localhost:8088/api/warehouses/list/warehouses');
+      const response = await axios.get('http://backend:8088/api/warehouses/list/warehouses');
       setWarehouses(response.data);
     } catch (error) {
       console.error('Error fetching warehouses:', error);
@@ -90,7 +90,7 @@ function EditInventory() {
       }
       
       console.log(selectedWarehouse);
-      const response = await axios.put(`http://localhost:8088/inventory/${id}`, {
+      const response = await axios.put(`http://backend:8088/inventory/${id}`, {
         ...itemDetails,
         warehouse_id: selectedWarehouse.id, 
         quantity: itemDetails.quantity
